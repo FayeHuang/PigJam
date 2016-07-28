@@ -16,9 +16,9 @@ class Main extends React.Component {
   
   static propTypes = {
     // ui state
-    date: PropTypes.string.isRequired,
-    beginTime: PropTypes.string.isRequired,
-    endTime: PropTypes.string.isRequired,
+    date: PropTypes.object.isRequired,
+    beginTime: PropTypes.object.isRequired,
+    endTime: PropTypes.object.isRequired,
     origin: PropTypes.string.isRequired,
     destination: PropTypes.string.isRequired,
     reduxState: PropTypes.object,
@@ -33,7 +33,7 @@ class Main extends React.Component {
 
   componentDidMount() {
     const {date, beginTime, endTime, origin, destination} = this.props;
-    this.props.dispatch(fetchDirections(origin, destination, date, beginTime, endTime));
+    this.props.dispatch(fetchDirections(origin, destination, beginTime, endTime));
   }
 
   render() {

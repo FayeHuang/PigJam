@@ -33,9 +33,12 @@ function directions(state = {
 }
 
 function ui(state = {
-  date: moment().format("YYYYMMDD"),
-  beginTime: moment().format("HHmm"),
-  endTime: moment().add(2, 'hours').format("HHmm"),
+  // date: moment().format("YYYYMMDD"),
+  // beginTime: moment().format("HHmm"),
+  // endTime: moment().add(2, 'hours').format("HHmm"),
+  date: moment(),
+  beginTime: moment(),
+  endTime: moment().add(2, 'hours'),
   origin: "台北市信義區信義路五段7號",
   destination: "台北市信義區市府路1號"
 }, action) {

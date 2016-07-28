@@ -20,9 +20,9 @@ import {
 class FunctionBar extends React.Component {
   
   static propTypes = {
-    date: PropTypes.string.isRequired,
-    beginTime: PropTypes.string.isRequired,
-    endTime: PropTypes.string.isRequired,
+    date: PropTypes.object.isRequired,
+    beginTime: PropTypes.object.isRequired,
+    endTime: PropTypes.object.isRequired,
     origin: PropTypes.string.isRequired,
     destination: PropTypes.string.isRequired,
   };
@@ -31,21 +31,16 @@ class FunctionBar extends React.Component {
     super(props);
   };
 
-  handleDepartureDateChange = (newDate) => {
-    console.log("newDate", newDate);
-    this.props.dispatch(changeDepartureDate(newDate))
-    // return this.setState({date: newDate});
-  };
 
   handleBeginTimeChange = (newDate) => {
     console.log("newBeginTime", newDate);
-    this.props.dispatch(changeBeginTime(newDate))
+    this.props.dispatch(changeBeginTime(moment(newDate,"YYYYMMDDHHmm")))
     // return this.setState({beginTime: newDate});
   };
 
   handleEndTimeChange = (newDate) => {
     console.log("newEndTime", newDate);
-    this.props.dispatch(changeEndTime(newDate))
+    this.props.dispatch(changeEndTime(moment(newDate,"YYYYMMDDHHmm")))
     // return this.setState({endTime: newDate});
   };
 
@@ -61,8 +56,8 @@ class FunctionBar extends React.Component {
 
   handelPrimaryButtonClick = () => {
     console.log('botton click');
-    const {origin, destination, date, beginTime, endTime} = this.props;
-    this.props.dispatch(fetchDirections(origin, destination, date, beginTime, endTime));
+    const {origin, destination, beginTime, endTime} = this.props;
+    this.props.dispatch(fetchDirections(origin, destination, beginTime, endTime));
   };
 
 
@@ -93,36 +88,20 @@ class FunctionBar extends React.Component {
           controlId="formBasicText"
           //validationState={this.getValidationState()}
         >
-          <ControlLabel>出發日期</ControlLabel>
+          <ControlLabel>預計出發時間</ControlLabel>
           <DateTimeField 
-            dateTime={date}
-            mode="date" 
-            format="YYYYMMDD"
-            inputFormat="YYYY/MM/DD dddd"
-            showToday={true}
-            onChange={this.handleDepartureDateChange}
-            size="sm"
-          />
-        </FormGroup>
-
-        <FormGroup
-          controlId="formBasicText"
-          //validationState={this.getValidationState()}
-        >
-          <ControlLabel>時間範圍</ControlLabel>
-          <DateTimeField 
-            dateTime={beginTime}
-            mode="time" 
-            format="HHmm"
-            inputFormat="H:mm"
+            dateTime={moment(beginTime).format("YYYYMMDDHHmm")}
+            //mode="time" 
+            format="YYYYMMDDHHmm"
+            inputFormat="YYYY/MM/DD dddd HH:mm"
             onChange={this.handleBeginTimeChange}
             size="sm"
           />
           <DateTimeField 
-            dateTime={endTime}
-            mode="time" 
-            format="HHmm"
-            inputFormat="H:mm"
+            dateTime={moment(endTime).format("YYYYMMDDHHmm")}
+            //mode="time" 
+            format="YYYYMMDDHHmm"
+            inputFormat="YYYY/MM/DD dddd HH:mm"
             onChange={this.handleEndTimeChange}
             size="sm"
           />

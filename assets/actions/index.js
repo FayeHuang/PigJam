@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import moment from 'moment';
 // redux actions
 //
 // ===== Async Actions =====
@@ -19,8 +20,8 @@ function receiveDirections(json) {
   }
 }
 
-export function fetchDirections(origin, destination, date, beginTime, endTime) {
-  let url = 'https://google-map-directions-fayehuang.c9users.io/api/directions?origin=' + origin + '&destination=' + destination + '&begin_time=' + date + beginTime + '&end_time=' + date + endTime
+export function fetchDirections(origin, destination, beginTime, endTime) {
+  let url = 'https://google-map-directions-fayehuang.c9users.io/api/directions?origin=' + origin + '&destination=' + destination + '&begin_time=' + beginTime.format("YYYYMMDDHHmm") + '&end_time=' + endTime.format("YYYYMMDDHHmm")
   return dispatch => {
     dispatch(requestDirections())
     return fetch(url)
