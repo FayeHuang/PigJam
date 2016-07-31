@@ -66,7 +66,7 @@ export default class Chart extends Component {
       return(
         <div style={{width:'100%', height:'200px'}}>
           <Info data={displayData} />
-          <div style={{}}>
+          <div>
             <ResponsiveBarChart
               data={chartData}
               //width={800}

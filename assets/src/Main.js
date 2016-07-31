@@ -41,20 +41,14 @@ class Main extends React.Component {
     return(
       <div className="container-fluid">
         <h1>Pig Jam</h1>
-        <div className="row">
-          <div className="col-xs-6 col-md-4">
-            <FunctionalBar />
-          </div>
-          <div className="col-xs-12 col-md-8">
-            <Chart data={this.props.data} />
-            {/*
-              <pre>
-            redux state = { JSON.stringify(reduxState, null, 2) }
-            </pre>
-            */}
-            
-          </div>
-        </div>
+        <FunctionalBar />
+        <Chart data={this.props.data} />
+        {/*
+          <pre>
+        redux state = { JSON.stringify(reduxState, null, 2) }
+        </pre>
+        */}
+        
       </div>
     )
   }

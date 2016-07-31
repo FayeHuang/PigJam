@@ -58,7 +58,7 @@ export default class Info extends Component {
       )
     });
     return (
-      <div style={{display: 'flex', justifyContent: 'space-around', padding:'25px'}}>
+      <div style={{display: 'flex', justifyContent: 'space-around', padding:'50px 25px 25px 25px'}}>
         { infoRender }
       </div>
     )

@@ -37,6 +37,7 @@ export const CHANGE_BEGIN_TIME = 'CHANGE_BEGIN_TIME'
 export const CHANGE_END_TIME = 'CHANGE_END_TIME'
 export const CHANGE_ORIGIN_PLACE = 'CHANGE_ORIGIN_PLACE'
 export const CHANGE_DESTINATION_PLACE = 'CHANGE_DESTINATION_PLACE'
+export const EXCHANGE_ORIGIN_DESTINATION = 'EXCHANGE_ORIGIN_DESTINATION'
 
 
 export function changeDepartureDate(date) {
@@ -72,4 +73,12 @@ export function changeDestinationPlace(place) {
     type: CHANGE_DESTINATION_PLACE,
     place: place
   }
+}
+
+export function exchangeOriginDestination(origin, destination) {
+  return {
+    type: EXCHANGE_ORIGIN_DESTINATION,
+    origin: origin,
+    destination: destination
+  } 
 }

@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
 import DateTimeField from 'react-bootstrap-datetimepicker';
-import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, HelpBlock, Button, Glyphicon } from 'react-bootstrap';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import {
@@ -14,7 +14,8 @@ import {
   changeBeginTime,
   changeEndTime,
   changeOriginPlace,
-  changeDestinationPlace
+  changeDestinationPlace,
+  exchangeOriginDestination
 } from '../actions'
 
 class FunctionBar extends React.Component {
@@ -31,18 +32,17 @@ class FunctionBar extends React.Component {
     super(props);
   };
 
-
   handleBeginTimeChange = (newDate) => {
     console.log("newBeginTime", newDate);
-    this.props.dispatch(changeBeginTime(moment(newDate,"YYYYMMDDHHmm")))
+    this.props.dispatch(changeBeginTime(moment(newDate,"YYYYMMDDHHmm")));
     // return this.setState({beginTime: newDate});
   };
 
-  handleEndTimeChange = (newDate) => {
-    console.log("newEndTime", newDate);
-    this.props.dispatch(changeEndTime(moment(newDate,"YYYYMMDDHHmm")))
-    // return this.setState({endTime: newDate});
-  };
+  // handleEndTimeChange = (newDate) => {
+  //   console.log("newEndTime", newDate);
+  //   this.props.dispatch(changeEndTime(moment(newDate,"YYYYMMDDHHmm")))
+  //   // return this.setState({endTime: newDate});
+  // };
 
   handleOriginChange = (e) => {
     this.props.dispatch(changeOriginPlace(e.target.value))
@@ -54,8 +54,18 @@ class FunctionBar extends React.Component {
     // return this.setState({ destination: e.target.value });
   };
 
-  handelPrimaryButtonClick = () => {
-    console.log('botton click');
+  // handelPrimaryButtonClick = () => {
+  //   console.log('botton click');
+  //   const {origin, destination, beginTime, endTime} = this.props;
+  //   this.props.dispatch(fetchDirections(origin, destination, beginTime, endTime));
+  // };
+
+  handleOriginDestinationExange = () => {
+    const {origin, destination} = this.props;
+    this.props.dispatch(exchangeOriginDestination(origin, destination));
+  };
+
+  handleGoButtonClick = () => {
     const {origin, destination, beginTime, endTime} = this.props;
     this.props.dispatch(fetchDirections(origin, destination, beginTime, endTime));
   };
@@ -64,12 +74,18 @@ class FunctionBar extends React.Component {
   render() {
     const {date, beginTime, endTime, origin, destination} = this.props
     return(
-      <div>
+      <div className="row">
         <FormGroup
           controlId="formBasicText"
+          className="col-xs-12 col-md-3"
           //validationState={this.getValidationState()}
         >
-          <ControlLabel>地點</ControlLabel>
+          <ControlLabel>
+            地點
+            <Button bsSize="small" onClick={this.handleOriginDestinationExange}>
+              <Glyphicon glyph="sort" />
+            </Button>
+          </ControlLabel>
           <FormControl
             type="text"
             value={origin}
@@ -86,9 +102,15 @@ class FunctionBar extends React.Component {
         
         <FormGroup
           controlId="formBasicText"
+          className="col-xs-12 col-md-3"
           //validationState={this.getValidationState()}
         >
-          <ControlLabel>預計出發時間</ControlLabel>
+          <ControlLabel>
+            預計出發時間 
+            <Button bsSize="small" onClick={this.handleGoButtonClick}>
+              GO
+            </Button>
+          </ControlLabel>
           <DateTimeField 
             dateTime={moment(beginTime).format("YYYYMMDDHHmm")}
             //mode="time" 
@@ -97,7 +119,8 @@ class FunctionBar extends React.Component {
             onChange={this.handleBeginTimeChange}
             size="sm"
           />
-          <DateTimeField 
+          {/*
+            <DateTimeField 
             dateTime={moment(endTime).format("YYYYMMDDHHmm")}
             //mode="time" 
             format="YYYYMMDDHHmm"
@@ -105,13 +128,19 @@ class FunctionBar extends React.Component {
             onChange={this.handleEndTimeChange}
             size="sm"
           />
+          */}
+          
         </FormGroup>
-        <Button 
+        {/*
+          <Button 
           bsStyle="primary"
           onClick={this.handelPrimaryButtonClick}
+          className="col-xs-6 col-md-4"
         >
           預報
         </Button>
+        */}
+        
       </div>
     )
   }
